@@ -11,117 +11,70 @@
     <div class="gate-card">
       <p class="brand">mydream.ai</p>
       <h1>Nur für Erwachsene</h1>
-      <p>Explizite Bilder und Videos. Du musst 18+ sein.</p>
-      <button id="age-yes" class="btn primary">Ich bin 18+</button>
+      <button type="button" id="age-yes" class="btn primary">Ich bin 18+</button>
     </div>
   </div>
   <header class="top">
-    <div class="brand-row">
-      <span class="logo">mydream.ai</span>
-      <span class="tag">18+ Studio</span>
-    </div>
+    <div class="brand-row"><span class="logo">mydream.ai</span><span class="tag">18+</span></div>
     <nav>
-      <button data-view="home" class="nav on">Start</button>
-      <button data-view="create" class="nav">Erstellen</button>
-      <button data-view="studio" class="nav">Studio</button>
-      <button data-view="people" class="nav">Personen</button>
+      <button type="button" class="nav on" data-view="home">Start</button>
+      <button type="button" class="nav" data-view="create">Erstellen</button>
+      <button type="button" class="nav" data-view="studio">Studio</button>
+      <button type="button" class="nav" data-view="people">Personen</button>
     </nav>
   </header>
   <main>
     <section id="view-home" class="view">
-      <div class="hero">
-        <h1>Vorauswahl anschauen. Dann selbst weiterbauen.</h1>
-        <p>Zehn Personen mit Bildern und Clips. Klick öffnet die Galerie. Danach Prompt für neue Szenen.</p>
-        <div class="row">
-          <button class="btn primary" data-go="create">Neue Person</button>
-          <button class="btn ghost" data-go="studio">Zum Studio</button>
-        </div>
-      </div>
-      <h2 class="sec">Vorauswahl</h2>
+      <h1>Vorauswahl</h1>
+      <p class="hint">Person wählen, dann Studio: Pose + Outfit + Szene + Prompt.</p>
       <div id="preset-grid" class="grid"></div>
     </section>
     <section id="view-person" class="view hidden">
-      <button class="btn ghost" data-go="home">← Zurück</button>
-      <h1 id="person-title">Person</h1>
+      <button type="button" class="btn ghost" data-view="home">Zurück</button>
+      <h1 id="person-title"></h1>
       <p id="person-desc" class="hint"></p>
-      <div class="row wrap">
-        <button id="use-person" class="btn primary">Mit dieser Person weiter prompten</button>
-        <button id="play-person-video" class="btn">Clip erzeugen & abspielen</button>
-      </div>
-      <h2 class="sec">Bilder</h2>
+      <button type="button" id="use-person" class="btn primary">Ins Studio</button>
       <div id="person-images" class="grid"></div>
-      <h2 class="sec">Videos</h2>
-      <div id="person-videos" class="grid"></div>
     </section>
     <section id="view-create" class="view hidden">
-      <h1>Person erstellen</h1>
-      <p class="hint">Beschreibe Aussehen, Körper, Alter (18+). Alles bleibt lokal.</p>
-      <label>Name</label>
-      <input id="p-name" placeholder="z. B. Lena" />
-      <label>Beschreibung</label>
-      <textarea id="p-desc" rows="6" placeholder="z. B. 26, lange dunkle Haare…"></textarea>
-      <label>Standard-Szene</label>
+      <h1>Person</h1>
+      <label>Name</label><input id="p-name" />
+      <label>Beschreibung</label><textarea id="p-desc" rows="4"></textarea>
       <select id="p-scene"></select>
-      <label>Zuerst erzeugen</label>
-      <div class="lens" id="create-kind">
-        <button type="button" data-kind="image" class="on">Nur Bild</button>
-        <button type="button" data-kind="video">Nur Video</button>
-      </div>
-      <div id="create-video-opts" class="hidden">
-        <label>Was soll im Video passieren?</label>
-        <textarea id="p-motion" rows="3" placeholder="z. B. kommt auf die Kamera zu, zieht sich aus, spricht leise…"></textarea>
-        <label class="check"><input type="checkbox" id="p-audio" /> Audio-Datei / Stimme mit erzeugen</label>
-        <textarea id="p-audio-text" rows="2" placeholder="Was soll sie sagen? (nur wenn Audio an)"></textarea>
-      </div>
-      <button id="save-person" class="btn primary">Person speichern & erzeugen</button>
+      <div class="lens" id="create-kind"><button type="button" data-kind="image" class="on">Bild</button><button type="button" data-kind="video">Video</button></div>
+      <div id="create-video-opts" class="hidden"><textarea id="p-motion" rows="2"></textarea><label class="check"><input type="checkbox" id="p-audio" /> Audio</label><textarea id="p-audio-text" rows="2"></textarea></div>
+      <button type="button" id="save-person" class="btn primary">Speichern</button>
     </section>
-    <section id="view-people" class="view hidden">
-      <h1>Deine Personen</h1>
-      <p class="hint">Eine oder mehrere wählen. Mehrere = gemeinsame Szene.</p>
-      <div id="people-list" class="people"></div>
-    </section>
+    <section id="view-people" class="view hidden"><div id="people-list" class="people"></div></section>
     <section id="view-studio" class="view hidden">
-      <div class="studio-head">
-        <h1>Studio</h1>
-        <div id="active-chips" class="chips"></div>
-      </div>
+      <h1>Generate</h1>
+      <div id="active-chips" class="chips"></div>
       <div class="studio-grid">
         <div class="panel">
-          <label>Aktive Personen</label>
           <div id="studio-people" class="mini-people"></div>
-          <label>Szene / Hintergrund</label>
-          <select id="scene"></select>
-          <label>Pose / Aktivität / Traum-Prompt</label>
-          <textarea id="action" rows="5" placeholder="Szene, Pose, Nacktheit, Sex, Blick, Handlung…"></textarea>
-          <label>Eigenes Foto</label>
-          <input type="file" id="self-photo" accept="image/*" />
-          <div id="self-preview" class="self-preview hidden"></div>
-          <label>Was soll im Video passieren?</label>
-          <textarea id="video-action" rows="3" placeholder="Bewegung, Handlung, Sexszene, Blick…"></textarea>
-          <label class="check"><input type="checkbox" id="video-audio" /> Audio mit Video erzeugen</label>
-          <label>Video-Länge</label>
+          <label>Hintergrund</label><select id="scene"></select>
+          <label>Pose</label><select id="pose"></select>
+          <label>Outfit</label><select id="outfit"></select>
+          <label>Custom Prompt</label><textarea id="action" rows="4" placeholder="Nur was sich in diesem Bild ändert"></textarea>
+          <label>Video-Handlung</label><textarea id="video-action" rows="2"></textarea>
+          <label class="check"><input type="checkbox" id="video-audio" /> Audio</label>
           <div class="lens" id="lengths"></div>
-          <label>Stimme</label>
           <select id="voice"></select>
-          <label>Gesprochener Text</label>
-          <textarea id="speak-text" rows="3" placeholder="Was soll sie sagen?"></textarea>
+          <textarea id="speak-text" rows="2"></textarea>
           <div class="row wrap">
-            <button id="gen-image" class="btn primary">Bild erzeugen</button>
-            <button id="gen-video" class="btn">Video erzeugen</button>
-            <button id="speak" class="btn ghost">Sprechen</button>
+            <button type="button" id="gen-image" class="btn primary">Bild erzeugen</button>
+            <button type="button" id="gen-video" class="btn">Video</button>
+            <button type="button" id="speak" class="btn ghost">Sprechen</button>
           </div>
-          <p id="status" class="status"></p>
-          <video id="preview-video" class="preview-video hidden" controls playsinline></video>
+          <p id="status" class="status">Bereit.</p>
+          <video id="preview-video" class="preview-video hidden" controls></video>
         </div>
-        <div class="panel">
-          <h2>Galerie</h2>
-          <div id="gallery" class="grid"></div>
-        </div>
+        <div class="panel"><h2>Galerie</h2><div id="gallery" class="grid"></div></div>
       </div>
     </section>
   </main>
-  <footer>mydream.ai · läuft im Browser</footer>
   <script src="app.js"></script>
   <script src="fix.js"></script>
+  <script src="gen.js"></script>
 </body>
 </html>
