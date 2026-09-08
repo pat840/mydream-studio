@@ -1,80 +1,44 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>mydream.ai</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>mydream.ai</title>
+<link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <div id="age-gate" class="gate">
-    <div class="gate-card">
-      <p class="brand">mydream.ai</p>
-      <h1>Nur für Erwachsene</h1>
-      <button type="button" id="age-yes" class="btn primary">Ich bin 18+</button>
-    </div>
-  </div>
-  <header class="top">
-    <div class="brand-row"><span class="logo">mydream.ai</span><span class="tag">18+</span></div>
-    <nav>
-      <button type="button" class="nav on" data-view="home">Start</button>
-      <button type="button" class="nav" data-view="create">Erstellen</button>
-      <button type="button" class="nav" data-view="studio">Studio</button>
-      <button type="button" class="nav" data-view="people">Personen</button>
-    </nav>
-  </header>
-  <main>
-    <section id="view-home" class="view">
-      <h1>Vorauswahl</h1>
-      <p class="hint">Person wählen, dann Studio: Pose + Outfit + Szene + Prompt.</p>
-      <div id="preset-grid" class="grid"></div>
-    </section>
-    <section id="view-person" class="view hidden">
-      <button type="button" class="btn ghost" data-view="home">Zurück</button>
-      <h1 id="person-title"></h1>
-      <p id="person-desc" class="hint"></p>
-      <button type="button" id="use-person" class="btn primary">Ins Studio</button>
-      <div id="person-images" class="grid"></div>
-    </section>
-    <section id="view-create" class="view hidden">
-      <h1>Person</h1>
-      <label>Name</label><input id="p-name" />
-      <label>Beschreibung</label><textarea id="p-desc" rows="4"></textarea>
-      <select id="p-scene"></select>
-      <div class="lens" id="create-kind"><button type="button" data-kind="image" class="on">Bild</button><button type="button" data-kind="video">Video</button></div>
-      <div id="create-video-opts" class="hidden"><textarea id="p-motion" rows="2"></textarea><label class="check"><input type="checkbox" id="p-audio" /> Audio</label><textarea id="p-audio-text" rows="2"></textarea></div>
-      <button type="button" id="save-person" class="btn primary">Speichern</button>
-    </section>
-    <section id="view-people" class="view hidden"><div id="people-list" class="people"></div></section>
-    <section id="view-studio" class="view hidden">
-      <h1>Generate</h1>
-      <div id="active-chips" class="chips"></div>
-      <div class="studio-grid">
-        <div class="panel">
-          <div id="studio-people" class="mini-people"></div>
-          <label>Hintergrund</label><select id="scene"></select>
-          <label>Pose</label><select id="pose"></select>
-          <label>Outfit</label><select id="outfit"></select>
-          <label>Custom Prompt</label><textarea id="action" rows="4" placeholder="Nur was sich in diesem Bild ändert"></textarea>
-          <label>Video-Handlung</label><textarea id="video-action" rows="2"></textarea>
-          <label class="check"><input type="checkbox" id="video-audio" /> Audio</label>
-          <div class="lens" id="lengths"></div>
-          <select id="voice"></select>
-          <textarea id="speak-text" rows="2"></textarea>
-          <div class="row wrap">
-            <button type="button" id="gen-image" class="btn primary">Bild erzeugen</button>
-            <button type="button" id="gen-video" class="btn">Video</button>
-            <button type="button" id="speak" class="btn ghost">Sprechen</button>
-          </div>
-          <p id="status" class="status">Bereit.</p>
-          <video id="preview-video" class="preview-video hidden" controls></video>
-        </div>
-        <div class="panel"><h2>Galerie</h2><div id="gallery" class="grid"></div></div>
-      </div>
-    </section>
-  </main>
-  <script src="app.js"></script>
-  <script src="fix.js"></script>
-  <script src="gen.js"></script>
-</body>
-</html>
+<div id="age-gate" class="gate"><div class="gate-card"><p class="brand">mydream.ai</p><h1>Nur für Erwachsene</h1><button type="button" id="age-yes" class="btn primary">Ich bin 18+</button></div></div>
+<div id="lightbox" class="lightbox hidden"><button type="button" id="lb-close" class="btn ghost">Schließen</button><img id="lb-img" alt=""/></div>
+<header class="top"><div class="brand-row"><span class="logo">mydream.ai</span><span class="tag">18+</span></div>
+<nav>
+<button type="button" class="nav on" data-view="home">Start</button>
+<button type="button" class="nav" data-view="create">Erstellen</button>
+<button type="button" class="nav" data-view="studio">Studio</button>
+<button type="button" class="nav" data-view="chat">Chat</button>
+<button type="button" class="nav" data-view="people">Personen</button>
+</nav></header>
+<main>
+<section id="view-home" class="view"><h1>Vorauswahl</h1><p class="hint">Person antippen. Bilder laden online (10–20 s).</p><div id="preset-grid" class="grid"></div></section>
+<section id="view-person" class="view hidden"><button type="button" class="btn ghost" data-view="home">Zurück</button><h1 id="person-title"></h1><p id="person-desc" class="hint"></p><div class="row wrap"><button type="button" id="use-person" class="btn primary">Ins Studio</button><button type="button" id="chat-person" class="btn">Chat</button></div><div id="person-images" class="grid"></div></section>
+<section id="view-create" class="view hidden"><h1>Person</h1><label>Name</label><input id="p-name"/><label>Beschreibung</label><textarea id="p-desc" rows="4"></textarea><div class="lens" id="create-kind"><button type="button" data-kind="image" class="on">Bild</button><button type="button" data-kind="video">Video</button></div><div id="create-video-opts" class="hidden"><textarea id="p-motion" rows="2"></textarea><label class="check"><input type="checkbox" id="p-audio"/> Audio</label><textarea id="p-audio-text" rows="2"></textarea></div><button type="button" id="save-person" class="btn primary">Speichern</button></section>
+<section id="view-people" class="view hidden"><div id="people-list" class="people"></div></section>
+<section id="view-studio" class="view hidden"><h1>Studio</h1><div id="active-chips" class="chips"></div>
+<div class="studio-grid"><div class="panel">
+<div id="studio-people" class="mini-people"></div>
+<label>Hintergrund</label><select id="scene"></select>
+<label>Pose</label><select id="pose"></select>
+<label>Outfit</label><select id="outfit"></select>
+<label>Prompt</label><textarea id="action" rows="4" placeholder="z. B. steht in der Tür, Blick in die Kamera"></textarea>
+<label>Video</label><textarea id="video-action" rows="2"></textarea>
+<label class="check"><input type="checkbox" id="video-audio"/> Audio</label>
+<div class="lens" id="lengths"></div>
+<select id="voice"></select>
+<textarea id="speak-text" rows="2" placeholder="Sprechtext"></textarea>
+<div class="row wrap"><button type="button" id="gen-image" class="btn primary">Bild erzeugen</button><button type="button" id="gen-video" class="btn">Video</button><button type="button" id="speak" class="btn ghost">Sprechen</button></div>
+<p id="status" class="status">Bereit.</p>
+<video id="preview-video" class="preview-video hidden" controls></video>
+</div><div class="panel"><h2>Galerie</h2><div id="gallery" class="grid"></div></div></div></section>
+<section id="view-chat" class="view hidden"><h1>Chat</h1><p id="chat-with" class="hint"></p><div id="chat-log" class="chat-log"></div><div class="row"><input id="chat-input" placeholder="Nachricht"/><button type="button" id="chat-send" class="btn primary">Senden</button></div></section>
+</main>
+<script src="app.js"></script>
+</body></html>
