@@ -4,15 +4,11 @@
     var p = encodeURIComponent("photorealistic portrait photo, 85mm, natural skin, adult woman 18+, " + clean);
     return "https://image.pollinations.ai/prompt/" + p + "?width=640&height=896&nologo=true&seed=" + (seed || Date.now());
   }
-  if (typeof imageUrl === "function") {
-    imageUrl = shortUrl;
-    window.imageUrl = shortUrl;
-  }
+  imageUrl = shortUrl;
+  window.imageUrl = shortUrl;
+  if (typeof renderPresets === "function") renderPresets();
   document.querySelectorAll("img").forEach(function (img) {
     img.referrerPolicy = "no-referrer";
-    if (img.src && img.src.indexOf("enhance=true") > -1) {
-      img.src = img.src.replace("&enhance=true", "").replace("width=768&height=1024", "width=640&height=896");
-    }
   });
   var kind = document.getElementById("create-kind");
   var opts = document.getElementById("create-video-opts");
@@ -39,7 +35,7 @@
       if (st && say) st.value = say;
       if (window.__createKind === "video" && typeof generateVideo === "function") {
         setTimeout(function () {
-          generateVideo(motion || "langsame Bewegung", (window.state && state.length) || 10);
+          generateVideo(motion || "langsame Bewegung", (typeof state !== "undefined" && state.length) || 10);
         }, 80);
       }
     });
@@ -47,7 +43,6 @@
   var gv = document.getElementById("gen-video");
   if (gv) {
     gv.addEventListener("click", function () {
-      var extra = ((document.getElementById("video-action") || {}).value || "").trim();
       var spoken = ((document.getElementById("speak-text") || {}).value || "").trim();
       var want = (document.getElementById("video-audio") || {}).checked;
       if (want && spoken && typeof speak === "function") setTimeout(speak, 900);
