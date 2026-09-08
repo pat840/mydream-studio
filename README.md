@@ -1,4 +1,5 @@
 # mydream.ai
 
-Vollversion mit Porträts: ZIP lokal öffnen (index.html + img/).
-GitHub Pages hat die JPG-Dateien nicht, wenn sie nicht mit committed wurden.
+Open: https://raw.githack.com/pat840/mydream-studio/main/index.html
+
+ourdream.ai has no public API. This app uses the same generate flow (character + pose + outfit + scene + prompt) with a free public image endpoint.
