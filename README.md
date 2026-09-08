@@ -1,6 +1,4 @@
 # mydream.ai
 
-Live: https://pat840.github.io/mydream-studio/
-
-Sofort-Link (falls Pages noch baut):
-https://raw.githack.com/pat840/mydream-studio/main/index.html
+Vollversion mit Porträts: ZIP lokal öffnen (index.html + img/).
+GitHub Pages hat die JPG-Dateien nicht, wenn sie nicht mit committed wurden.
