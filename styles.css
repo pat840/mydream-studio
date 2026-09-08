@@ -54,6 +54,9 @@ textarea { resize: vertical; }
 .status { color: var(--mute); min-height: 1.4em; font-family: system-ui, sans-serif; font-size: 13px; }
 .self-preview img { max-height: 120px; border-radius: 8px; margin-top: 8px; }
 .preview-video { width: 100%; margin-top: 12px; border-radius: 12px; background: #000; }
+.check { display: flex; align-items: center; gap: 8px; color: var(--text); }
+.check input { width: auto; }
+.ph { aspect-ratio: 3/4; display: grid; place-items: center; background: radial-gradient(circle at 30% 20%, #3a2a1c, #141416 62%); color: var(--gold-2); font-size: 28px; letter-spacing: .08em; }
 footer { text-align: center; color: var(--mute); padding: 24px; font-size: 13px; font-family: system-ui, sans-serif; }
 @media (max-width: 800px) {
   .top { flex-direction: column; gap: 10px; }
